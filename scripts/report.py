@@ -191,6 +191,8 @@ def evaluate_and_report(
     *,
     limit=None,
     balanced=None,
+    frac=None,
+    seed=42,
     workers=4,
     out_path=None,
     errors_out=None,
@@ -201,7 +203,7 @@ def evaluate_and_report(
 ):
     """اجرا + رندرِ داشبورد. خروجی: (res, fig)."""
     res = run_evaluation(
-        data_path, limit=limit, balanced=balanced, workers=workers,
+        data_path, limit=limit, balanced=balanced, frac=frac, seed=seed, workers=workers,
         out_path=out_path, errors_out=errors_out,
     )
     fig = render_dashboard(res, dataset_name=dataset_name or str(data_path), prices=prices)
@@ -221,12 +223,13 @@ if __name__ == "__main__":
     ap.add_argument("data_path")
     ap.add_argument("--limit", type=int, default=None)
     ap.add_argument("--balanced", type=int, default=None)
+    ap.add_argument("--frac", type=float, default=None, help="fraction per combo, e.g. 0.2")
     ap.add_argument("--workers", type=int, default=4)
     ap.add_argument("--out", default=None)
     ap.add_argument("--errors", default=None, help="ذخیرهٔ تیکت‌های اشتباه + متن (JSONL)")
     ap.add_argument("--save", default="accuracy_report.png")
     a = ap.parse_args()
     evaluate_and_report(
-        a.data_path, limit=a.limit, balanced=a.balanced, workers=a.workers,
+        a.data_path, limit=a.limit, balanced=a.balanced, frac=a.frac, workers=a.workers,
         out_path=a.out, errors_out=a.errors, save_path=a.save, show=False,
     )
