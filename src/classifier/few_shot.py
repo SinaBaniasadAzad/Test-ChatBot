@@ -49,10 +49,10 @@ def _build_output(example: dict, tax: Taxonomy) -> dict:
                 break
         layers_obj[layer.id] = {"candidates": candidates, "needs_clarification": False}
     return {
+        "reasoning": "Domain and type are grounded in explicit evidence; no clarification needed.",
         "layers": layers_obj,
         "clarifying_question": None,
         "suggested_summary": example.get("summary", ""),
-        "reasoning": "Clear evidence in text; no clarification needed.",
     }
 
 
