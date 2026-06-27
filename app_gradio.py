@@ -29,14 +29,14 @@ _KEY = ""
 try:
     from kaggle_secrets import UserSecretsClient  # type: ignore
 
-    _KEY = UserSecretsClient().get_secret("OPENROUTER_API_KEY")
+    _KEY = UserSecretsClient().get_secret("DEEPSEEK_API_KEY")
 except Exception:
     _KEY = os.environ.get("OPENROUTER_API_KEY", os.environ.get("DEEPSEEK_API_KEY", ""))
 
 os.environ["DEEPSEEK_API_KEY"] = _KEY
 os.environ["DEEPSEEK_BASE_URL"] = os.environ.get("DEEPSEEK_BASE_URL", "https://api.deepseek.com")
 # ★ مدلِ تست (طبق درخواست):
-os.environ["DEEPSEEK_MODEL"] = os.environ.get("DEEPSEEK_MODEL", "deepseek-v4-flash")
+os.environ["DEEPSEEK_MODEL"] = os.environ.get("DEEPSEEK_MODEL", "deepseek-v4-pro")
 
 # ★ لوگوی شرکت: مسیرِ فایل (مثلاً "assets/logo.png") یا URL. خالی = نشانِ پیش‌فرض.
 LOGO_SRC = "data/logo.png"
